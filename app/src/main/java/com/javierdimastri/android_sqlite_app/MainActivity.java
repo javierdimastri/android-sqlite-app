@@ -18,32 +18,26 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        username = (EditText) findViewById(R.id.username);
-        password = (EditText) findViewById(R.id.password);
-        btnLogin = (Button)findViewById(R.id.btnLogin);
+        username = findViewById(R.id.username);
+        password = findViewById(R.id.password);
+        btnLogin = findViewById(R.id.btnLogin);
 
-        btnLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        btnLogin.setOnClickListener(v -> {
 
-                String usernameKey = username.getText().toString();
-                String passwordKey = password.getText().toString();
+            String usernameKey = username.getText().toString();
+            String passwordKey = password.getText().toString();
 
-                if (usernameKey.equals("admin") && passwordKey.equals("123")){
-                    //jika login berhasil
-                    Toast.makeText(getApplicationContext(), "LOGIN SUKSES",
-                            Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(MainActivity.this, MainActivity.this.getClass());
-                    MainActivity.this.startActivity(intent);
-                    finish();
-                }else {
-                    //jika login gagal
-                    AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-                    builder.setMessage("Username atau Password Anda salah!")
-                            .setNegativeButton("Retry", null).create().show();
-                }
+            if (usernameKey.equals("admin") && passwordKey.equals("123")){
+                Toast.makeText(getApplicationContext(), "LOGIN SUKSES",
+                        Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(MainActivity.this, HomePage.class);
+                MainActivity.this.startActivity(intent);
+                finish();
+            }else {
+                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                builder.setMessage("Username atau Password Anda salah!")
+                        .setNegativeButton("Retry", null).create().show();
             }
-
         });
 
     }
